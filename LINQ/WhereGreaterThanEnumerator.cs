@@ -8,17 +8,17 @@ namespace LINQ
         {
             var arr = new int[] { 1, 2, 3, 4 };
 
-            foreach (var number in new GreaterThanEnumerable(arr, 2))
+            foreach (var number in new WhereGreaterThanEnumerable(arr, 2))
                 Console.WriteLine(number);
         }
     }
 
-    public class GreaterThanEnumerable : IEnumerable<int>
+    public class WhereGreaterThanEnumerable : IEnumerable<int>
     {
         private readonly IEnumerable<int> _enumerable;
         private readonly int _number;
 
-        public GreaterThanEnumerable(IEnumerable<int> enumerable, int number)
+        public WhereGreaterThanEnumerable(IEnumerable<int> enumerable, int number)
         {
             _enumerable = enumerable;
             _number = number;
@@ -26,7 +26,7 @@ namespace LINQ
 
         public IEnumerator<int> GetEnumerator()
         {
-            return new GreaterThanEnumerator(_enumerable, _number);
+            return new WhereGreaterThanEnumerator(_enumerable, _number);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -36,12 +36,12 @@ namespace LINQ
     }
 
 
-    public class GreaterThanEnumerator : IEnumerator<int>
+    public class WhereGreaterThanEnumerator : IEnumerator<int>
     {
         private readonly int _number;
         private readonly IEnumerator<int> _enumerator;
 
-        public GreaterThanEnumerator(IEnumerable<int> enumerable, int number)
+        public WhereGreaterThanEnumerator(IEnumerable<int> enumerable, int number)
         {
             _number = number;
             _enumerator = enumerable.GetEnumerator();
